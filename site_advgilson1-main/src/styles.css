@@ -1,6 +1,5 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 @import "tw-animate-css";
-@source "../src";
 :root {
   --gold: #c9a55a;
   --gold-light: #e0c084;

@@ -4,11 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
+  ScrollRestoration,
 } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -68,50 +65,18 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada e Sob Medida" },
-      { name: "description", content: "Ciência jurídica avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos. OAB/TO 2.591 · OAB/RJ 256.131. Atendimento em todo o Brasil." },
-      { name: "author", content: "Gilson Carvalho Advocacia" },
-      { property: "og:title", content: "Gilson Carvalho — Advocacia | Ciência Jurídica Avançada" },
-      { property: "og:description", content: "Ciência jurídica avançada e advocacia sob medida para proteger o seu patrimônio e seus direitos." },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
-      { rel: "shortcut icon", type: "image/png", href: "/favicon.png" },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <ScrollRestoration />
     </QueryClientProvider>
   );
 }

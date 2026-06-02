@@ -1,12 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
+import tailwindcss from "@tailwindcss/vite";
 import { fileURLToPath } from "url";
 
 export default defineConfig({
   plugins: [
     TanStackRouterVite(),
     react(),
+    tailwindcss(), // <-- Garanta que essa linha está aqui!
   ],
   resolve: {
     alias: {
