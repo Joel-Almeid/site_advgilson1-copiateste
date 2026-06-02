@@ -1,18 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen' // Corrigido: sem o /routes/
-import './styles.css' // Corrigido: sem o /routes/
+import { RouterProvider } from '@tanstack/react-router'
+import { getRouter } from './router' // Corrigido: router.tsx está direto na pasta src
+import './styles.css' // Corrigido: styles.css também está direto na src
 
-// Cria o roteador com a árvore de rotas do projeto
-const router = createRouter({ routeTree })
-
-// Registra o roteador para o TypeScript reconhecer as rotas corretamente
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router
-  }
-}
+const router = getRouter()
 
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {
